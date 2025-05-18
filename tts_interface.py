@@ -9,8 +9,8 @@ import requests
 
 st.set_page_config(page_title="Arabic Text to Speech", layout="centered")
 
-st.title("الكلام بقى ليه صوت")
-st.write("ارفع صورة فيها كلام بالعربي أو اكتبه بإيدك وسيب الباقي علينا")
+st.title("الكلام  بقى  ليه  صوت")
+st.write("ارفع  صورة  فيها  كلام  بالعربي  أو  اكتبه  بإيدك  وسيب  الباقي  علينا")
 
 # تحميل ملف اللغة العربية لـ Tesseract تلقائيًا
 def download_ara_traineddata():
@@ -31,30 +31,30 @@ tessdata_dir = download_ara_traineddata()
 os.environ["TESSDATA_PREFIX"] = tessdata_dir
 
 # اختيار طريقة الإدخال
-option = st.radio("اختار اللي تحبه:", ["هرفعلك صورة", "هكتب الكلام بإيدي"])
+option = st.radio("اختار  اللي  تحبه:", ["هرفعلك  صورة", "هكتب  الكلام  بإيدي"])
 
 # إدخال النص أو الصورة
 text = ""
 
-if option == "هرفعلك صورة":
-    uploaded_image = st.file_uploader("ارفع صورة", type=["png", "jpg", "jpeg"])
+if option == "هرفعلك  صورة":
+    uploaded_image = st.file_uploader("ارفع  صورة", type=["png", "jpg", "jpeg"])
     if uploaded_image is not None:
         image = Image.open(uploaded_image)
-        st.image(image, caption="الصورة اللي رفعتها", use_column_width=True)
+        st.image(image, caption="الصورة  اللي  رفعتها", use_column_width=True)
         text = pytesseract.image_to_string(image, lang='ara')
         if text.strip():
-            st.success("عرفنا نطلع الكلام اللي في الصورة")
-            st.text_area("الكلام اللي في الصورة:", value=text, height=150)
+            st.success("عرفنا  نطلع  الكلام  اللي  في  الصورة")
+            st.text_area("الكلام  اللي  في  الصورة:", value=text, height=150)
         else:
-            st.warning("معرفناش نخرج الكلام من الصورة للأسف حاول تاني")
+            st.warning("معرفناش  نخرج  الكلام  من  الصورة  للأسف  حاول  تاني")
 
-elif option == "هكتب الكلام بإيدي":
-    text = st.text_area(" اكتب الكلام هنا:")
+elif option == "هكتب  الكلام  بإيدي":
+    text = st.text_area(" اكتب  الكلام  هنا:")
 
 # زر التحويل
-if st.button("جاهز تسمع كلامك؟"):
+if st.button("جاهز  تسمع  كلامك؟"):
     if text.strip() == "":
-        st.error("مدخلتش كلام هتسمع ايه؟ روح دخل كلام متتعبناش")
+        st.error("مدخلتش  كلام  هتسمع  ايه؟  روح  دخل  كلام  متتعبناش")
     else:
         tts = gTTS(text, lang='ar')
         tts.save("output.mp3")
