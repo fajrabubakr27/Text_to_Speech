@@ -7,11 +7,10 @@ import os
 import base64
 import requests
 
-# إعداد الصفحة
-st.set_page_config(page_title="Text to Speech - Arabic", layout="centered")
+st.set_page_config(page_title="Arabic Text to Speech", layout="centered")
 
-st.title("🔊 تحويل النص العربي إلى صوت")
-st.write("اختر صورة تحتوي على نص عربي أو اكتب النص يدويًا، وسيتم تحويله إلى صوت.")
+st.title("الكلام بقى ليه صوت")
+st.write("ارفع صورة فيها كلام بالعربي أو اكتبه بإيدك وسيب الباقي علينا")
 
 # تحميل ملف اللغة العربية لـ Tesseract تلقائيًا
 def download_ara_traineddata():
