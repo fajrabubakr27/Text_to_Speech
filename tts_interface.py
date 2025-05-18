@@ -58,4 +58,12 @@ if st.button("🎤 تحويل النص إلى صوت"):
         st.error("من فضلك أدخل نصًا أولاً.")
     else:
         tts = gTTS(text, lang='ar')
-        tts.save
+        tts.save("output.mp3")
+        st.audio("output.mp3", format="audio/mp3", start_time=0)
+
+        # زر التحميل
+        with open("output.mp3", "rb") as audio_file:
+            audio_bytes = audio_file.read()
+            b64 = base64.b64encode(audio_bytes).decode()
+            href = f'<a href="data:audio/mp3;base64,{b64}" download="output.mp3">📥 تحميل الصوت</a>'
+            st.markdown(href, unsafe_allow_html=True)
