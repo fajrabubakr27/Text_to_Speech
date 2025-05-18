@@ -40,7 +40,7 @@ if option == "هرفعلك  صورة":
     uploaded_image = st.file_uploader("ارفع  صورة", type=["png", "jpg", "jpeg"])
     if uploaded_image is not None:
         image = Image.open(uploaded_image)
-        st.image(image, caption="الصورة  اللي  رفعتها", use_column_width=True)
+        st.image(image, caption="الصورة  اللي  رفعتها", use_container_width=True)
         text = pytesseract.image_to_string(image, lang='ara')
         if text.strip():
             st.success("عرفنا  نطلع  الكلام  اللي  في  الصورة")
