@@ -31,30 +31,30 @@ tessdata_dir = download_ara_traineddata()
 os.environ["TESSDATA_PREFIX"] = tessdata_dir
 
 # اختيار طريقة الإدخال
-option = st.radio("اختر طريقة الإدخال:", ["📷 إدخال صورة", "✍️ كتابة نص يدويًا"])
+option = st.radio("اختار اللي تحبه:", ["هرفعلك صورة", "هكتب الكلام بإيدي"])
 
 # إدخال النص أو الصورة
 text = ""
 
-if option == "📷 إدخال صورة":
+if option == "هرفعلك صورة":
     uploaded_image = st.file_uploader("ارفع صورة", type=["png", "jpg", "jpeg"])
     if uploaded_image is not None:
         image = Image.open(uploaded_image)
-        st.image(image, caption="📷 الصورة التي تم رفعها", use_column_width=True)
+        st.image(image, caption="الصورة اللي رفعتها", use_column_width=True)
         text = pytesseract.image_to_string(image, lang='ara')
         if text.strip():
-            st.success("✅ تم استخراج النص من الصورة.")
-            st.text_area("📝 النص المستخرج:", value=text, height=150)
+            st.success("عرفنا نطلع الكلام اللي في الصورة")
+            st.text_area("الكلام اللي في الصورة:", value=text, height=150)
         else:
-            st.warning("⚠️ لم يتم استخراج أي نص من الصورة.")
+            st.warning("معرفناش نخرج الكلام من الصورة للأسف حاول تاني")
 
-elif option == "✍️ كتابة نص يدويًا":
-    text = st.text_area("✍️ اكتب النص هنا:")
+elif option == "هكتب الكلام بإيدي":
+    text = st.text_area(" اكتب الكلام هنا:")
 
 # زر التحويل
-if st.button("🎤 تحويل النص إلى صوت"):
+if st.button("جاهز تسمع كلامك؟"):
     if text.strip() == "":
-        st.error("من فضلك أدخل نصًا أولاً.")
+        st.error("مدخلتش كلام هتسمع ايه؟ روح دخل كلام متتعبناش")
     else:
         tts = gTTS(text, lang='ar')
         tts.save("output.mp3")
@@ -64,5 +64,5 @@ if st.button("🎤 تحويل النص إلى صوت"):
         with open("output.mp3", "rb") as audio_file:
             audio_bytes = audio_file.read()
             b64 = base64.b64encode(audio_bytes).decode()
-            href = f'<a href="data:audio/mp3;base64,{b64}" download="output.mp3">📥 تحميل الصوت</a>'
+            href = f'<a href="data:audio/mp3;base64,{b64}" download="output.mp3">📥 عايز تنزل صوتك؟</a>'
             st.markdown(href, unsafe_allow_html=True)
