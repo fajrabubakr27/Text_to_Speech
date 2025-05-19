@@ -9,6 +9,21 @@ import requests
 
 st.set_page_config(page_title="Arabic Text to Speech", layout="centered")
 
+
+st.markdown(
+    """
+    <style>
+    html, body, [class*="css"]  {
+        direction: rtl;
+        text-align: right;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
+
+
+
 st.title("الكلام  بقى  ليه  صوت")
 st.write("ارفع  صورة  فيها  كلام  بالعربي  أو  اكتبه  بإيدك  وسيب  الباقي  علينا")
 
