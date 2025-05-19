@@ -12,19 +12,16 @@ st.set_page_config(page_title="Arabic Text to Speech", layout="centered")
 st.title("الكلام  بقى  ليه  صوت")
 st.write("ارفع  صورة  فيها  كلام  بالعربي  أو  اكتبه  بإيدك  وسيب  الباقي  علينا")
 
-# تحميل ملف اللغة العربية لـ Tesseract تلقائيًا
 def download_ara_traineddata():
     tessdata_dir = "./tessdata"
     os.makedirs(tessdata_dir, exist_ok=True)
     file_path = os.path.join(tessdata_dir, "ara.traineddata")
 
     if not os.path.exists(file_path):
-        st.info("جارٍ تحميل نموذج اللغة العربية لـ Tesseract...")
         url = "https://github.com/tesseract-ocr/tessdata/raw/main/ara.traineddata"
         response = requests.get(url)
         with open(file_path, "wb") as f:
             f.write(response.content)
-        st.success("✅ تم تحميل نموذج اللغة العربية بنجاح.")
     return tessdata_dir
 
 tessdata_dir = download_ara_traineddata()
