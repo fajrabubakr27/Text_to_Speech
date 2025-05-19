@@ -27,10 +27,8 @@ def download_ara_traineddata():
 tessdata_dir = download_ara_traineddata()
 os.environ["TESSDATA_PREFIX"] = tessdata_dir
 
-# اختيار طريقة الإدخال
 option = st.radio("اختار  اللي  تحبه:", ["هرفعلك  صورة", "هكتب  الكلام  بإيدي"])
 
-# إدخال النص أو الصورة
 text = ""
 
 if option == "هرفعلك  صورة":
@@ -43,21 +41,19 @@ if option == "هرفعلك  صورة":
             st.success("عرفنا  نطلع  الكلام  اللي  في  الصورة")
             st.text_area("الكلام  اللي  في  الصورة:", value=text, height=150)
         else:
-            st.warning("معرفناش  نخرج  الكلام  من  الصورة  للأسف  حاول  تاني")
+            st.warning("معرفناش  نخرج  الكلام  من  الصورة  حاول  تاني  بصورة أوضح")
 
 elif option == "هكتب  الكلام  بإيدي":
     text = st.text_area(" اكتب  الكلام  هنا:")
 
-# زر التحويل
 if st.button("جاهز  تسمع  كلامك؟"):
     if text.strip() == "":
-        st.error("مدخلتش  كلام  هتسمع  ايه؟  روح  دخل  كلام  متتعبناش")
+        st.error("فاتتكك ازاي دي بس! نسيت تكتب الكلام...")
     else:
         tts = gTTS(text, lang='ar')
         tts.save("output.mp3")
         st.audio("output.mp3", format="audio/mp3", start_time=0)
 
-        # زر التحميل
         with open("output.mp3", "rb") as audio_file:
             audio_bytes = audio_file.read()
             b64 = base64.b64encode(audio_bytes).decode()
