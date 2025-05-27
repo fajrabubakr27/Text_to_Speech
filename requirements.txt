@@ -2,5 +2,3 @@ streamlit
 gTTS
 pytesseract
 opencv-python
-transformers
-torch
